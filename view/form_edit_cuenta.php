@@ -28,9 +28,10 @@
                 <td>
                     <select name="cliente">
                         <?php foreach ($arrayClientes as $clientes) {
-                            if($cuenta->getId() == $_REQUEST['id']){
-                                echo "<option selected value='$clientes->id'>" . $clientes->getNombreApellido() . "</option>";
-                            } else
+                            if($cuenta->getId() == $_REQUEST['id'] && $cuenta->getCliente() == $clientes->getId()){
+                                echo "<option selected value='$clientes->id'>" . $cuenta->getNombreApellidoCliente() . "</option>";
+                                continue;
+                            }
                             echo "<option value='$clientes->id'>" . $clientes->getNombreApellido() . "</option>";
                         }
                         ?>

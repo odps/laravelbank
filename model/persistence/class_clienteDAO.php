@@ -5,8 +5,10 @@ class clienteDAO extends db
 {
     public function inserirCliente($cliente)
     {
+        $fechaN = $cliente->getFechaN()->format('Y-m-d');
+
         $query = "INSERT INTO cliente (dni, nombre, apellidos, fechaN) VALUES ('" . $cliente->getDni() . "',
-            '" . $cliente->getNombre() . "', '" . $cliente->getApellido() . "', '" . $cliente->getFechaN() . "');";
+        '" . $cliente->getNombre() . "', '" . $cliente->getApellido() . "', '" . $fechaN . "');";
 
         $resultado = $this->consulta($query);
         $this->close();
