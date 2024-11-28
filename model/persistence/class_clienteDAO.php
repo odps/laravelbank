@@ -3,38 +3,33 @@ require_once 'class_db.php';
 
 class clienteDAO extends db
 {
-
     public function inserirCliente($cliente)
     {
-        //$dni, $nombre, $apellido, $fechaN
-        $query = "insert into cliente (dni, nombre, apellidos, fechaN) values ('" . $cliente->getDni() . "',
+        $query = "INSERT INTO cliente (dni, nombre, apellidos, fechaN) VALUES ('" . $cliente->getDni() . "',
             '" . $cliente->getNombre() . "', '" . $cliente->getApellido() . "', '" . $cliente->getFechaN() . "');";
 
-        $con = new db();
-        $resultado = $con->consulta($query);
-        $con->close();
+        $resultado = $this->consulta($query);
+        $this->close();
 
         return $resultado;
     }
 
     public function eliminarCliente($id)
     {
-        $query = "delete from cliente where id = '" . $id . "';";
+        $query = "DELETE FROM cliente WHERE id = '" . $id . "';";
 
-        $con = new db();
-        $resultado = $con->consulta($query);
-        $con->close();
+        $resultado = $this->consulta($query);
+        $this->close();
 
         return $resultado;
     }
 
     public function buscarClienteId($id)
     {
-        $query = "select * from cliente where id = '" . $id . "';";
+        $query = "SELECT * FROM cliente WHERE id = '" . $id . "';";
 
-        $con = new db();
-        $consulta = $con->consulta($query);
-        $con->close();
+        $consulta = $this->consulta($query);
+        $this->close();
 
         $row = $consulta->fetch_object();
 
@@ -50,9 +45,8 @@ class clienteDAO extends db
     {
         $query = "SELECT * FROM cliente;";
 
-        $con = new db();
-        $consulta = $con->consulta($query);
-        $con->close();
+        $consulta = $this->consulta($query);
+        $this->close();
 
         $arrayClientes = array();
         foreach ($consulta as $row) {
@@ -66,13 +60,10 @@ class clienteDAO extends db
 
     public function editarCliente($id, $dni, $nombre, $apellido, $fechaN)
     {
-        //$dni, $nombre, $apellido, $fechaN
+        $query = "UPDATE cliente SET nombre = '" . $nombre . "', apellidos = '" . $apellido . "', fechaN = '" . $fechaN . "', dni = '" . $dni . "' WHERE id = '" . $id . "';";
 
-        $query = "update cliente set nombre = '" . $nombre . "', apellidos = '" . $apellido . "', fechaN = '" . $fechaN . "', dni = '" . $dni . "' where id = '" . $id . "';";
-
-        $con = new db();
-        $resultado = $con->consulta($query);
-        $con->close();
+        $resultado = $this->consulta($query);
+        $this->close();
 
         return $resultado;
     }
